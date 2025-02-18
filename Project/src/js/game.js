@@ -215,10 +215,10 @@ function decideEnemyAction() {
 function checkGameOver() {
     if (enemyHealth <= 0) {
         logAction("🎉 Player wins!");
-        setTimeout(() => window.location.href = CONFIG.PAGES.WIN);
+        setTimeout(() => window.location.href = CONFIG.PAGES.HTML.WIN);
     } else if (playerHealth <= 0) {
         logAction("💀 Enemy wins!");
-        setTimeout(() => window.location.href = CONFIG.PAGES.LOSE, );
+        setTimeout(() => window.location.href = CONFIG.PAGES.HTML.LOSE, );
     }
 }
 
