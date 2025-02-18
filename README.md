@@ -56,7 +56,7 @@ Project/
 │   │   └── dummy.js
 │   ├── imports/
 │   │   └── import.js
-│── index.html
+└── index.html
 ```
 
 ### Leiðbeningar
