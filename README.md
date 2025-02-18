@@ -13,6 +13,26 @@ Project/
 │── assets/
 │   ├── audio/
 │   └── sprite/
+│   │   ├── Characters/
+│   │   │   ├── Player.svg
+│   │   │   └── Enemy.svg
+│   │   ├── Environment/
+│   │   │   ├── Buildings/
+│   │   │   │   ├── Building_1.svg
+│   │   │   │   ├── Building_2.svg
+│   │   │   │   ├── Building_3.svg
+│   │   │   │   └── Building_4.svg
+│   │   │   └── Nature/
+│   │   │   │   ├── Bush_1.svg
+│   │   │   │   ├── Bush_2.svg
+│   │   │   │   ├── Bush_3.svg
+│   │   │   │   ├── Tree_1.svg
+│   │   │   │   ├── Tree_2.svg
+│   │   │   │   └── Tree_3.svg
+│   │   └── MoveSett/
+│   │   │   ├── Shield.svg
+│   │   │   ├── Fire.svg
+│   │   │   └── Player.svg
 │── src/
 │   ├── html/
 │   │   ├── dummy.html
@@ -23,8 +43,7 @@ Project/
 │   │   └── dummy.js
 │   ├── imports/
 │   │   └── import.js
-│── index.html
-```
+│── index.html```
 
 ### Leiðbeningar
 Það eru 3 hreyfingar sem hægt er að gera. <br>
