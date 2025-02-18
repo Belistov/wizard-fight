@@ -6,6 +6,8 @@ A small turn based RPG fight between 2 wizards (player and computer) dice rolls,
 |-|-|
 |https://codepen.io/shshaw/pen/XbxvNj|PNG > SVG|
 |https://tympanus.net/codrops/2024/10/24/creating-a-3d-hand-controller-using-a-webcam-with-mediapipe-and-three-js/|Hand Controller Demo|
+|https://www.remove.bg/upload|Remove Background|
+
 ### Hlutverk
 |Andri|Matti|
 |-|-|
