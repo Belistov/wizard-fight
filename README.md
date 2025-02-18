@@ -1,7 +1,10 @@
 # wizard-fight
 A small turn based RPG fight between 2 wizards (player and computer) dice rolls, hand tracking.
 
-
+### Góðir Hlekkir
+|Hlekkur|Hvað er þetta|
+|-|-|
+|https://codepen.io/shshaw/pen/XbxvNj|PNG > SVG|
 ### Hlutverk
 |Andri|Matti|
 |-|-|
