@@ -26,12 +26,12 @@ Project/
 │── index.html
 ```
 
-### Hvernig Þetta Virkar
+### Leiðbeningar
 Það eru 3 hreyfingar sem hægt er að gera. <br>
-1. 🤟 - Varpa Eldkúlu á óvinn. Kastaður er teningur upp á skaða 1d6
-2. 👍 - Auka líf sitt upp. Kastaður er teningur upp á líf auka 1d4
-3. ✋ - Varpa skyldi til að vernda sig sjálfan. Skaði minnkar um 50%
+1. 🤟 - Varpar Eldkúlu á óvin. Kastaður er teningur upp á skaða 1d6
+2. 👍 - Fá meiri lífstig. Kastaður er teningur upp á auka líf 1d4
+3. ✋ - Varpa skyldi til að vernda sjálfan sig. Skaði minnkar um 50%
 
 1. Hver Galdra Kall hefur 75 Líf
-2. 10% líkur að ekki vera hittur af árás
-3. 3% líkur að deyja strax
+2. 10% líkur að árás hittir ekki (miss)
+3. 3% líkur að árás drepur strax óvin
