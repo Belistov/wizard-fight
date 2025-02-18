@@ -1,4 +1,7 @@
-Building_1.svg
-Building_2.svg
-Building_3.svg
-Building_4.svg
+Left side | Player | Blue 
+L_Building_1.svg
+L_Building_2.svg
+
+Right Side | Enemy | Red
+R_Building_1.svg
+R_Building_2.svg
