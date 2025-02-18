@@ -35,10 +35,14 @@ Project/
 │   │   │   │   ├── Tree_1.svg
 │   │   │   │   ├── Tree_2.svg
 │   │   │   │   └── Tree_3.svg
-│   │   └── MoveSett/
+│   │   ├── MoveSet/
 │   │   │   ├── Shield.svg
 │   │   │   ├── Fire.svg
 │   │   │   └── Player.svg
+│   │   └── Numbers/
+│   │   │   ├── 1.svg
+│   │   │   ├── 2.svg
+│   │   │   └── 3.svg
 │── src/
 │   ├── html/
 │   │   ├── dummy.html
