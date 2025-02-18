@@ -10,7 +10,7 @@ A small turn based RPG fight between 2 wizards (player and computer) dice rolls,
 ### File Strúktúr
 js
 
-```js
+```graphQL
 Project/
 │── assets/
 │   ├── audio/
