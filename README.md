@@ -43,8 +43,9 @@ Project/
 │   │   ├── MoveSet/
 │   │   │   ├── Shield.svg
 │   │   │   ├── Fire.svg
-│   │   │   └── Player.svg
+│   │   │   └── Heal.svg
 │   │   └── Numbers/
+│   │   │   ├── 0.svg
 │   │   │   ├── 1.svg
 │   │   │   ├── 2.svg
 │   │   │   ├── 3.svg
@@ -53,12 +54,14 @@ Project/
 │   │   │   └── 6.svg
 │── src/
 │   ├── html/
-│   │   ├── dummy.html
-│   │   └── dummy2.html
+│   │   ├── win.html
+│   │   ├── lose.html
+│   │   └── start.html
 │   ├── css/
-│   │   └── dummy.css
+│   │   └── style.css
 │   ├── js/
-│   │   └── dummy.js
+│   │   ├── game.js
+│   │   └── config.js
 │   ├── imports/
 │   │   └── import.js
 └── index.html
