@@ -8,10 +8,15 @@ A small turn based RPG fight between 2 wizards (player and computer) dice rolls,
 |https://tympanus.net/codrops/2024/10/24/creating-a-3d-hand-controller-using-a-webcam-with-mediapipe-and-three-js/|Hand Controller Demo|
 |https://www.remove.bg/upload|Remove Background|
 
-### Hlutverk
-|Andri|Matti|
-|-|-|
-|Graphics|Hand Controlls|
+### Hlutverk og To Do
+| Hvað | Status | Hver |
+|-|-|-|
+| Sprites | Working | Andri |
+| Gesture Controll | Working | Matti |
+| Attack System | N/A | Matti |
+| Environment Settup | N/A | Andri |
+| CSS | N/A | N/A |
+|add |to|list|
 
 ### File Strúktúr
 ```graphQL
