@@ -1,0 +1,6 @@
+Bush_1.svg
+Bush_2.svg
+Bush_3.svg
+Tree_1.svg
+Tree_2.svg
+Tree_3.svg
