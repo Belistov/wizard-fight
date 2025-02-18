@@ -8,7 +8,7 @@ A small turn based RPG fight between 2 wizards (player and computer) dice rolls,
 |Graphics|Hand Controlls|
 
 ### File Strúktúr
-```
+```js
 Project/
 │── assets/
 │   ├── audio/
@@ -43,7 +43,8 @@ Project/
 │   │   └── dummy.js
 │   ├── imports/
 │   │   └── import.js
-│── index.html```
+│── index.html
+```
 
 ### Leiðbeningar
 Það eru 3 hreyfingar sem hægt er að gera. <br>
