@@ -170,6 +170,7 @@ function playerAction(action) {
     }
 
     updateHealthBars();
+    checkGameOver();
     setTimeout(() => enemyTurn(), 1000);
 }
 
@@ -222,6 +223,7 @@ function enemyTurn() {
     }
 
     updateHealthBars();
+    checkGameOver();
     setTimeout(() => setButtonsState(false), 500);
 }
 
@@ -238,14 +240,20 @@ function decideEnemyAction() {
 function checkGameOver() {
     if (enemyHealth <= 0) {
         logAction("🎉 Player wins!");
+        setButtonsState(true); // Disable buttons to prevent further actions
         setTimeout(() => {
             window.location.href = "src/html/win.html"; // Redirect to win screen
         }, 1000);
-    } else if (playerHealth <= 0) {
+        return; // Stop further execution
+    } 
+    
+    if (playerHealth <= 0) {
         logAction("💀 Enemy wins!");
+        setButtonsState(true); // Disable buttons to prevent further actions
         setTimeout(() => {
             window.location.href = "src/html/lose.html"; // Redirect to lose screen
         }, 1000);
+        return; // Stop further execution
     }
 }
 
