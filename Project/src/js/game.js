@@ -13,13 +13,18 @@ function playAudio(audioKey) {
     audio.play();
 }
 
+// DELETE BEFORE HANDING IN ASIGNMENT < function logAction() >
 function logAction(message) {
     let logList = document.getElementById("log-list");
     let logItem = document.createElement("li");
     logItem.innerText = message;
     logList.appendChild(logItem);
-}
 
+    // Limit log to 10 entries
+    if (logList.children.length > 10) {
+        logList.removeChild(logList.firstChild);
+    }
+}
 function updateHealthBars() {
     updateHealthBar("player-health-bar", playerHealth);
     updateHealthBar("enemy-health-bar", enemyHealth);
@@ -74,6 +79,15 @@ function createFloatingNumber(targetId, number, type) {
     setTimeout(() => numberElement.remove(), 2000);
 }
 
+function glowEffect(targetId, color) {
+    let target = document.getElementById(targetId);
+    target.style.transition = "filter 0.2s ease-in-out";
+    target.style.filter = `drop-shadow(0px 0px 20px ${color})`;
+
+    setTimeout(() => {
+        target.style.filter = "none";
+    }, 1000);
+}
 
 function toggleShieldEffect(targetId, isActive) {
     let target = document.getElementById(targetId);
@@ -109,31 +123,30 @@ function toggleShieldEffect(targetId, isActive) {
     }
 }
 
-
-
-
 function playerAction(action) {
     setButtonsState(true);
 
     if (action === "attack") {
         let damage = rollDice(6);
-        let reducedDamage = damage;
         let blockedDamage = 0;
+        let reducedDamage = damage;
 
         if (enemyShieldActive) {
-            blockedDamage = Math.floor(damage / 2);
-            reducedDamage = damage - blockedDamage;
-            enemyShieldActive = false;
-
-            logAction(`🔥 Player casts Fireball! Damage: ${damage} (Shield Blocked: ${blockedDamage}, Final: ${reducedDamage})`);
-            createFloatingNumber("enemy", blockedDamage, "shield-block");
-            createFloatingNumber("enemy", reducedDamage, "shield-taken");
-
-            toggleShieldEffect("enemy", false); // Remove enemy shield immediately after blocking
-        } else {
-            logAction(`🔥 Player casts Fireball! Deals ${damage} damage.`);
-            createFloatingNumber("enemy", damage, "damage");
+            blockedDamage = rollDice(4);
+            reducedDamage = Math.max(0, damage - blockedDamage);
+            enemyShieldActive = false; // Shield breaks after blocking one attack
+            toggleShieldEffect("enemy", false);
         }
+
+        logAction(`🔥 Player casts Fireball! Damage: ${damage} (Blocked: ${blockedDamage}, Final: ${reducedDamage})`);
+        
+        if (blockedDamage > 0) {
+            createFloatingNumber("enemy", blockedDamage, "shield-block"); // Show blocked damage
+        }
+        
+        createFloatingNumber("enemy", reducedDamage, "damage"); // Show final damage
+
+        glowEffect("enemy", "red");
 
         enemyHealth = Math.max(0, enemyHealth - reducedDamage);
         document.getElementById("enemy").classList.add("shake");
@@ -145,16 +158,19 @@ function playerAction(action) {
         playerHealth = Math.min(75, playerHealth + healAmount);
         logAction(`💚 Player heals for ${healAmount} HP.`);
         createFloatingNumber("player", healAmount, "heal");
+        glowEffect("player", "green");
     } 
     
     else if (action === "shield") {
-        playerShieldActive = true;
-        toggleShieldEffect("player", true);
-        logAction(`🛡 Player activates Shield!`);
+        if (!playerShieldActive) {
+            playerShieldActive = true;
+            toggleShieldEffect("player", true);
+            logAction(`🛡 Player activates Shield!`);
+        }
     }
 
     updateHealthBars();
-    setTimeout(() => setTimeout(enemyTurn, 1000), 75);
+    setTimeout(() => enemyTurn(), 1000);
 }
 
 function enemyTurn() {
@@ -162,45 +178,52 @@ function enemyTurn() {
 
     if (action === "attack") {
         let damage = rollDice(6);
-        let reducedDamage = damage;
         let blockedDamage = 0;
+        let reducedDamage = damage;
 
         if (playerShieldActive) {
-            blockedDamage = Math.floor(damage / 2);
-            reducedDamage = damage - blockedDamage;
-            playerShieldActive = false;
+            blockedDamage = rollDice(4);
+            reducedDamage = Math.max(0, damage - blockedDamage);
+            playerShieldActive = false; // Shield breaks after blocking one attack
             toggleShieldEffect("player", false);
-
-            createFloatingNumber("player", blockedDamage, "shield-block");
-            createFloatingNumber("player", reducedDamage, "shield-taken");
-        } else {
-            createFloatingNumber("player", reducedDamage, "damage");
         }
 
+        logAction(`🔥 Enemy attacks for ${damage} (Blocked: ${blockedDamage}, Final: ${reducedDamage})`);
+        
+        if (blockedDamage > 0) {
+            createFloatingNumber("player", blockedDamage, "shield-block"); // Show blocked damage
+        }
+        
+        createFloatingNumber("player", reducedDamage, "damage"); // Show final damage
+
+        glowEffect("player", "red");
+
         playerHealth = Math.max(0, playerHealth - reducedDamage);
-        logAction(`🔥 Enemy attacks for ${reducedDamage} damage.`);
         playAudio("ATTACK");
 
         document.getElementById("player").classList.add("shake");
         setTimeout(() => document.getElementById("player").classList.remove("shake"), 200);
-    } else if (action === "heal") {
+    } 
+    
+    else if (action === "heal") {
         let healAmount = rollDice(4);
         enemyHealth = Math.min(75, enemyHealth + healAmount);
         logAction(`💚 Enemy heals for ${healAmount} HP.`);
-        playAudio("HEAL");
         createFloatingNumber("enemy", healAmount, "heal");
-    } else if (action === "shield") {
-        enemyShieldActive = true;
-        toggleShieldEffect("enemy", true);
-        logAction("🛡 Enemy activates Shield!");
+        glowEffect("enemy", "green");
+    } 
+    
+    else if (action === "shield") {
+        if (!enemyShieldActive) {
+            enemyShieldActive = true;
+            toggleShieldEffect("enemy", true);
+            logAction("🛡 Enemy activates Shield!");
+        }
     }
 
     updateHealthBars();
     setTimeout(() => setButtonsState(false), 500);
-    checkGameOver();
 }
-
-
 
 function decideEnemyAction() {
     let healthPercentage = (enemyHealth / 75) * 100;
@@ -215,10 +238,14 @@ function decideEnemyAction() {
 function checkGameOver() {
     if (enemyHealth <= 0) {
         logAction("🎉 Player wins!");
-        setTimeout(() => window.location.href = CONFIG.PAGES.HTML.WIN);
+        setTimeout(() => {
+            window.location.href = "src/html/win.html"; // Redirect to win screen
+        }, 1000);
     } else if (playerHealth <= 0) {
         logAction("💀 Enemy wins!");
-        setTimeout(() => window.location.href = CONFIG.PAGES.HTML.LOSE, );
+        setTimeout(() => {
+            window.location.href = "src/html/lose.html"; // Redirect to lose screen
+        }, 1000);
     }
 }
 
