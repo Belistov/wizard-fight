@@ -1,2 +1,0 @@
-Player.svg
-Enemy.svg

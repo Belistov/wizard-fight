@@ -1,3 +1,0 @@
-Shield.svg
-Fire.svg
-Player.svg
