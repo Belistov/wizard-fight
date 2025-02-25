@@ -8,16 +8,15 @@
 </head>
 <body>
     <!-- Start Screen -->
-    <section id="start-screen">
-        <h1>Welcome to Wizard Battle</h1>
-        <button onclick="startGame()">Start Game</button>
-    </section>
     <section id="bilid">
-     <br><br><br><br><br><br><br>
+        <p>
+            🤟 - Varpar Eldkúlu á óvin. Kastaður er teningur upp á skaða 1d6. 👍 - Fá meiri lífstig. Kastaður er teningur upp á auka líf 1d4. ✋ - Varpa skyldi til að vernda sjálfan sig. Skaði minnkar um 50%
+        </p>
+        <br><br><br><br><br><br><br>
     </section>
 
-    <!-- Game Screen (Initially Hidden) -->
-    <section id="game-container" style="display: none;">
+    <!-- Game Screen -->
+    <section id="game-container">
         <div id="battlefield">
             <div id="player">
                 <img id="player-img" alt="Player Wizard">
@@ -36,12 +35,8 @@
             </div>
         </div>
 
-        <div id="controls-container">
-            <button onclick="playerAction('attack')">🔥 Fireball</button>
-            <button onclick="playerAction('heal')">💚 Heal</button>
-            <button onclick="playerAction('shield')">🛡 Shield</button>
-        </div>
-
+        <video id="camera-feed" width="640" height="480" autoplay></video>
+        
         <div id="game-log">
             <h2>Game Log</h2>
             <ul id="log-list"></ul>
@@ -50,15 +45,19 @@
 
     <script src="src/js/config.js"></script>
     <script src="src/js/game.js"></script>
-
+    
     <script>
-        function startGame() {
-            document.getElementById("start-screen").style.display = "none";
-            document.getElementById("game-container").style.display = "block";
-
-            // Assign images dynamically from CONFIG
+        document.addEventListener("DOMContentLoaded", async () => {
+            await startCamera();
             document.getElementById("player-img").src = CONFIG.SPRITES.CHARACTERS.PLAYER;
             document.getElementById("enemy-img").src = CONFIG.SPRITES.CHARACTERS.ENEMY;
+        });
+    
+        async function startCamera() {
+            const video = document.getElementById("camera-feed");
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
+            video.style.transform = "scaleX(-1)";
         }
     </script>
 </body>

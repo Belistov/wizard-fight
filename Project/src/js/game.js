@@ -3,6 +3,61 @@ let enemyHealth = 75;
 let playerShieldActive = false;
 let enemyShieldActive = false;
 
+import { Hands } from '@mediapipe/hands';
+import { Camera } from '@mediapipe/camera_utils';
+
+const videoElement = document.getElementById('camera-feed');
+
+// Initialize MediaPipe Hands
+const hands = new Hands({
+    locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
+});
+
+hands.setOptions({
+    maxNumHands: 1,
+    modelComplexity: 1,
+    minDetectionConfidence: 0.5,
+    minTrackingConfidence: 0.5
+});
+
+hands.onResults(onResults);
+
+const camera = new Camera(videoElement, {
+    onFrame: async () => {
+        await hands.send({ image: videoElement });
+    },
+    width: 640,
+    height: 480
+});
+camera.start();
+
+function onResults(results) {
+    if (results.multiHandLandmarks.length > 0) {
+        const landmarks = results.multiHandLandmarks[0];
+        const gesture = detectGesture(landmarks);
+        if (gesture) {
+            playerAction(gesture);
+        }
+    }
+}
+
+function detectGesture(landmarks) {
+    const thumbTip = landmarks[4];
+    const indexTip = landmarks[8];
+    const middleTip = landmarks[12];
+
+    if (indexTip.y < thumbTip.y && middleTip.y < thumbTip.y) {
+        return 'attack'; // Fireball
+    }
+    if (thumbTip.y < indexTip.y && thumbTip.y < middleTip.y) {
+        return 'heal'; // Heal
+    }
+    if (indexTip.y > middleTip.y) {
+        return 'shield'; // Shield
+    }
+    return null;
+}
+
 function rollDice(sides) {
     return Math.floor(Math.random() * sides) + 1;
 }
@@ -124,9 +179,7 @@ function toggleShieldEffect(targetId, isActive) {
 }
 
 function playerAction(action) {
-    setButtonsState(true);
-
-    if (action === "attack") {
+    if (action === detectGesture('attack')) {
         let damage = rollDice(6);
         let blockedDamage = 0;
         let reducedDamage = damage;
@@ -153,7 +206,7 @@ function playerAction(action) {
         setTimeout(() => document.getElementById("enemy").classList.remove("shake"), 200);
     } 
     
-    else if (action === "heal") {
+    else if (action === detectGesture('heal')) {
         let healAmount = rollDice(4);
         playerHealth = Math.min(75, playerHealth + healAmount);
         logAction(`💚 Player heals for ${healAmount} HP.`);
@@ -161,7 +214,7 @@ function playerAction(action) {
         glowEffect("player", "green");
     } 
     
-    else if (action === "shield") {
+    else if (action === detectGesture('sheild')) {
         if (!playerShieldActive) {
             playerShieldActive = true;
             toggleShieldEffect("player", true);

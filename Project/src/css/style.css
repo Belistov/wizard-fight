@@ -133,3 +133,9 @@ button {
     0% { opacity: 0.45; }
     100% { opacity: 0.75; }
 }
+
+#camera-feed {
+    width: 15%; /* Adjust size of the camera feed */
+    height: auto;
+    border: 2px solid #fff;
+}
