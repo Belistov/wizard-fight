@@ -3,39 +3,39 @@ let enemyHealth = 75;
 let playerShieldActive = false;
 let enemyShieldActive = false;
 
-import { Hands } from '@mediapipe/hands';
-import { Camera } from '@mediapipe/camera_utils';
+document.getElementById("player-img").src = CONFIG.SPRITES.CHARACTERS.PLAYER;
+document.getElementById("enemy-img").src = CONFIG.SPRITES.CHARACTERS.ENEMY;
 
-const videoElement = document.getElementById('camera-feed');
+// MediaPipe Hands
+const videoElement = document.createElement("video");
+const canvasElement = document.createElement("canvas");
+canvasElement.width = 1920;
+canvasElement.height = 1080;
+document.body.appendChild(canvasElement);
+const canvasCtx = canvasElement.getContext("2d");
 
-// Initialize MediaPipe Hands
-const hands = new Hands({
-    locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
-});
-
-hands.setOptions({
-    maxNumHands: 1,
-    modelComplexity: 1,
-    minDetectionConfidence: 0.5,
-    minTrackingConfidence: 0.5
-});
-
+const hands = new Hands({ locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}` });
+hands.setOptions({ maxNumHands: 1, modelComplexity: 1, minDetectionConfidence: 0.8, minTrackingConfidence: 0.8 });
 hands.onResults(onResults);
 
-const camera = new Camera(videoElement, {
-    onFrame: async () => {
-        await hands.send({ image: videoElement });
-    },
-    width: 640,
-    height: 480
+const cameraFeed = new Camera(videoElement, {
+    onFrame: async () => { await hands.send({ image: videoElement }); },
+    width: 1920,
+    height: 1080
 });
-camera.start();
+cameraFeed.start();
 
+// Handahreyfingar
 function onResults(results) {
-    if (results.multiHandLandmarks.length > 0) {
-        const landmarks = results.multiHandLandmarks[0];
-        const gesture = detectGesture(landmarks);
-        if (gesture) {
+    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+    canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+
+    if (results.multiHandLandmarks) {
+        for (const landmarks of results.multiHandLandmarks) {
+            drawConnectors(canvasCtx, landmarks, Hands.HAND_CONNECTIONS, { color: "#00FF00", lineWidth: 20 });
+            drawLandmarks(canvasCtx, landmarks, { color: "#FF0000", lineWidth: 1 });
+
+            const gesture = detectGesture(landmarks);
             playerAction(gesture);
         }
     }
@@ -45,14 +45,19 @@ function detectGesture(landmarks) {
     const thumbTip = landmarks[4];
     const indexTip = landmarks[8];
     const middleTip = landmarks[12];
+    const ringTip = landmarks[16];
+    const pinkyTip = landmarks[20];
 
-    if (indexTip.y < thumbTip.y && middleTip.y < thumbTip.y) {
+    if (thumbTip.y && indexTip.y && pinkyTip.y < middleTip.y && ringTip.y) {
+        console.log("attack registered")
         return 'attack'; // Fireball
     }
     if (thumbTip.y < indexTip.y && thumbTip.y < middleTip.y) {
+        console.log("heal registered")
         return 'heal'; // Heal
     }
-    if (indexTip.y > middleTip.y) {
+    if (thumbTip.y && indexTip.y && middleTip.y && ringTip.y && pinkyTip.y) {
+        console.log("shield registered")
         return 'shield'; // Shield
     }
     return null;
@@ -76,7 +81,7 @@ function logAction(message) {
     logList.appendChild(logItem);
 
     // Limit log to 10 entries
-    if (logList.children.length > 10) {
+    if (logList.children.length > 2) {
         logList.removeChild(logList.firstChild);
     }
 }
@@ -179,7 +184,7 @@ function toggleShieldEffect(targetId, isActive) {
 }
 
 function playerAction(action) {
-    if (action === detectGesture('attack')) {
+    if (action === "attack") {
         let damage = rollDice(6);
         let blockedDamage = 0;
         let reducedDamage = damage;
@@ -204,21 +209,24 @@ function playerAction(action) {
         enemyHealth = Math.max(0, enemyHealth - reducedDamage);
         document.getElementById("enemy").classList.add("shake");
         setTimeout(() => document.getElementById("enemy").classList.remove("shake"), 200);
+        setTimeout(1000)
     } 
     
-    else if (action === detectGesture('heal')) {
+    else if (action === 'heal') {
         let healAmount = rollDice(4);
         playerHealth = Math.min(75, playerHealth + healAmount);
         logAction(`💚 Player heals for ${healAmount} HP.`);
         createFloatingNumber("player", healAmount, "heal");
         glowEffect("player", "green");
+        setTimeout(1000)
     } 
     
-    else if (action === detectGesture('sheild')) {
+    else if (action === 'shield') {
         if (!playerShieldActive) {
             playerShieldActive = true;
             toggleShieldEffect("player", true);
             logAction(`🛡 Player activates Shield!`);
+            setTimeout(1000)
         }
     }
 
@@ -257,6 +265,7 @@ function enemyTurn() {
 
         document.getElementById("player").classList.add("shake");
         setTimeout(() => document.getElementById("player").classList.remove("shake"), 200);
+        setTimeout(1000)
     } 
     
     else if (action === "heal") {
@@ -265,6 +274,7 @@ function enemyTurn() {
         logAction(`💚 Enemy heals for ${healAmount} HP.`);
         createFloatingNumber("enemy", healAmount, "heal");
         glowEffect("enemy", "green");
+        setTimeout(1000)
     } 
     
     else if (action === "shield") {
@@ -272,6 +282,7 @@ function enemyTurn() {
             enemyShieldActive = true;
             toggleShieldEffect("enemy", true);
             logAction("🛡 Enemy activates Shield!");
+            setTimeout(1000)
         }
     }
 
