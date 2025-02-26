@@ -41,6 +41,8 @@ function onResults(results) {
     }
 }
 
+let lastGesture = null; // Store the last detected gesture
+
 function detectGesture(landmarks) {
     const thumbTip = landmarks[4];
     const indexTip = landmarks[8];
@@ -48,19 +50,29 @@ function detectGesture(landmarks) {
     const ringTip = landmarks[16];
     const pinkyTip = landmarks[20];
 
+    let gesture = null;
+
     if (thumbTip.y && indexTip.y && pinkyTip.y < middleTip.y && ringTip.y) {
-        console.log("attack registered")
-        return 'attack'; // Fireball
+        gesture = 'attack'; // Fireball
+    } else if (thumbTip.y < indexTip.y && thumbTip.y < middleTip.y) {
+        gesture = 'heal'; // Heal
+    } else if (thumbTip.y && indexTip.y && middleTip.y && ringTip.y && pinkyTip.y) {
+        gesture = 'shield'; // Shield
     }
-    if (thumbTip.y < indexTip.y && thumbTip.y < middleTip.y) {
-        console.log("heal registered")
-        return 'heal'; // Heal
+
+    if (gesture && gesture !== lastGesture) {
+        console.log(`${gesture} registered`);
+        lastGesture = gesture; // Update last detected gesture
+
+        // Clear the gesture after a short delay to allow new gestures
+        setTimeout(() => {
+            lastGesture = null;
+        }, 500); // Adjust delay as needed (500ms = 0.5 seconds)
+
+        return gesture;
     }
-    if (thumbTip.y && indexTip.y && middleTip.y && ringTip.y && pinkyTip.y) {
-        console.log("shield registered")
-        return 'shield'; // Shield
-    }
-    return null;
+
+    return null; // No new gesture detected
 }
 
 function rollDice(sides) {
@@ -209,7 +221,6 @@ function playerAction(action) {
         enemyHealth = Math.max(0, enemyHealth - reducedDamage);
         document.getElementById("enemy").classList.add("shake");
         setTimeout(() => document.getElementById("enemy").classList.remove("shake"), 200);
-        setTimeout(1000)
     } 
     
     else if (action === 'heal') {
@@ -218,7 +229,6 @@ function playerAction(action) {
         logAction(`💚 Player heals for ${healAmount} HP.`);
         createFloatingNumber("player", healAmount, "heal");
         glowEffect("player", "green");
-        setTimeout(1000)
     } 
     
     else if (action === 'shield') {
@@ -226,7 +236,6 @@ function playerAction(action) {
             playerShieldActive = true;
             toggleShieldEffect("player", true);
             logAction(`🛡 Player activates Shield!`);
-            setTimeout(1000)
         }
     }
 
@@ -235,69 +244,95 @@ function playerAction(action) {
     setTimeout(() => enemyTurn(), 1000);
 }
 
+let lastEnemyAction = null; // Store last enemy action
+let enemyTurnInProgress = false; // Prevent multiple turns happening too fast
+
 function enemyTurn() {
+    if (enemyTurnInProgress) return; // If a turn is already happening, do nothing
+    enemyTurnInProgress = true; // Mark turn as in progress
+
     let action = decideEnemyAction();
 
+    // Prevent repeating the same action consecutively
+    while (action === lastEnemyAction) {
+        action = decideEnemyAction();
+    }
+
+    lastEnemyAction = action; // Store the new action
+
     if (action === "attack") {
-        let damage = rollDice(6);
-        let blockedDamage = 0;
-        let reducedDamage = damage;
-
-        if (playerShieldActive) {
-            blockedDamage = rollDice(4);
-            reducedDamage = Math.max(0, damage - blockedDamage);
-            playerShieldActive = false; // Shield breaks after blocking one attack
-            toggleShieldEffect("player", false);
-        }
-
-        logAction(`🔥 Enemy attacks for ${damage} (Blocked: ${blockedDamage}, Final: ${reducedDamage})`);
-        
-        if (blockedDamage > 0) {
-            createFloatingNumber("player", blockedDamage, "shield-block"); // Show blocked damage
-        }
-        
-        createFloatingNumber("player", reducedDamage, "damage"); // Show final damage
-
-        glowEffect("player", "red");
-
-        playerHealth = Math.max(0, playerHealth - reducedDamage);
-        playAudio("ATTACK");
-
-        document.getElementById("player").classList.add("shake");
-        setTimeout(() => document.getElementById("player").classList.remove("shake"), 200);
-        setTimeout(1000)
-    } 
-    
-    else if (action === "heal") {
-        let healAmount = rollDice(4);
-        enemyHealth = Math.min(75, enemyHealth + healAmount);
-        logAction(`💚 Enemy heals for ${healAmount} HP.`);
-        createFloatingNumber("enemy", healAmount, "heal");
-        glowEffect("enemy", "green");
-        setTimeout(1000)
-    } 
-    
-    else if (action === "shield") {
-        if (!enemyShieldActive) {
-            enemyShieldActive = true;
-            toggleShieldEffect("enemy", true);
-            logAction("🛡 Enemy activates Shield!");
-            setTimeout(1000)
-        }
+        handleEnemyAttack();
+    } else if (action === "heal") {
+        handleEnemyHeal();
+    } else if (action === "shield") {
+        handleEnemyShield();
     }
 
     updateHealthBars();
     checkGameOver();
-    setTimeout(() => setButtonsState(false), 500);
+
+    // Add a delay before allowing another enemy turn
+    setTimeout(() => {
+        enemyTurnInProgress = false; // Reset turn status
+        setButtonsState(false); // Enable player actions
+    }, 1000); // Adjust delay as needed (1000ms = 1 second)
+}
+
+function handleEnemyAttack() {
+    let damage = rollDice(6);
+    let blockedDamage = 0;
+    let reducedDamage = damage;
+
+    if (playerShieldActive) {
+        blockedDamage = rollDice(4);
+        reducedDamage = Math.max(0, damage - blockedDamage);
+        playerShieldActive = false; // Shield breaks after blocking one attack
+        toggleShieldEffect("player", false);
+    }
+
+    logAction(`🔥 Enemy attacks for ${damage} (Blocked: ${blockedDamage}, Final: ${reducedDamage})`);
+
+    if (blockedDamage > 0) {
+        createFloatingNumber("player", blockedDamage, "shield-block");
+    }
+
+    createFloatingNumber("player", reducedDamage, "damage");
+    glowEffect("player", "red");
+
+    playerHealth = Math.max(0, playerHealth - reducedDamage);
+    playAudio("ATTACK");
+
+    document.getElementById("player").classList.add("shake");
+    setTimeout(() => document.getElementById("player").classList.remove("shake"), 200);
+}
+
+function handleEnemyHeal() {
+    let healAmount = rollDice(4);
+    enemyHealth = Math.min(75, enemyHealth + healAmount);
+    logAction(`💚 Enemy heals for ${healAmount} HP.`);
+    createFloatingNumber("enemy", healAmount, "heal");
+    glowEffect("enemy", "green");
+}
+
+function handleEnemyShield() {
+    if (!enemyShieldActive) {
+        enemyShieldActive = true;
+        toggleShieldEffect("enemy", true);
+        logAction("🛡 Enemy activates Shield!");
+    }
 }
 
 function decideEnemyAction() {
     let healthPercentage = (enemyHealth / 75) * 100;
     let roll = Math.random() * 100;
 
-    if (healthPercentage > 80) return roll < 75 ? "attack" : roll < 85 ? "shield" : "heal";
-    if (healthPercentage > 50) return roll < 65 ? "attack" : roll < 80 ? "shield" : "heal";
-    if (healthPercentage > 20) return roll < 50 ? "attack" : roll < 75 ? "shield" : "heal";
+    // Don't let the enemy just copy the player's last move
+    let possibleActions = ["attack", "heal", "shield"];
+    
+    // Decide based on health percentage and random roll
+    if (healthPercentage > 80) return roll < 70 ? "attack" : roll < 85 ? "shield" : "heal";
+    if (healthPercentage > 50) return roll < 60 ? "attack" : roll < 75 ? "shield" : "heal";
+    if (healthPercentage > 20) return roll < 45 ? "attack" : roll < 70 ? "shield" : "heal";
     return roll < 30 ? "attack" : roll < 50 ? "shield" : "heal";
 }
 
