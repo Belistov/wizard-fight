@@ -13,7 +13,7 @@ A small turn based RPG fight between 2 wizards (player and computer) dice rolls,
 |-|-|-|
 | Sprites | Working | Andri |
 | Gesture Controll | Working | Matti |
-| Attack System | N/A | Matti |
+| Attack System | Working | Matti |
 | Environment Settup | N/A | Andri |
 | CSS | N/A | N/A |
 |add |to|list|
