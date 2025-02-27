@@ -12,7 +12,7 @@ A small turn based RPG fight between 2 wizards (player and computer) dice rolls,
 | Hvað | Status | Hver |
 |-|-|-|
 | Sprites | Working | Andri |
-| Audio | Working | Matti |
+| Audio | Done | Matti |
 | Gesture Controll | Working | Matti |
 | Attack System | Working | Matti |
 | Environment Settup | Working | Andri |
