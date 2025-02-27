@@ -217,6 +217,7 @@ function playerAction(action) {
         enemyHealth = Math.max(0, enemyHealth - reducedDamage);
         document.getElementById("enemy").classList.add("shake");
         setTimeout(() => document.getElementById("enemy").classList.remove("shake"), 200);
+        setTimeout(() => enemyTurn(), 1000);
     } 
     
     else if (action === "heal") {
@@ -226,7 +227,7 @@ function playerAction(action) {
         createFloatingNumber("player", healAmount, "heal");
         glowEffect("player", "green");
         AudioManager.playSound("HEAL");
-
+        setTimeout(() => enemyTurn(), 1000);
     } 
     
     else if (action === "shield") {
@@ -237,6 +238,7 @@ function playerAction(action) {
             AudioManager.playSound("SHIELD_ACTIVATE");
 
         }
+        setTimeout(() => enemyTurn(), 1000);
     }
 
     updateHealthBars();
