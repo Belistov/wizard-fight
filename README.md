@@ -1,18 +1,22 @@
-# wizard-fight
+# wizard-fight // Þetta verður link á leikinn
 A small turn based RPG fight between 2 wizards (player and computer) dice rolls, hand tracking.
 
 ### Góðir Hlekkir
 |Hlekkur|Hvað er þetta|
 |-|-|
-|https://codepen.io/shshaw/pen/XbxvNj|PNG > SVG|
-|https://tympanus.net/codrops/2024/10/24/creating-a-3d-hand-controller-using-a-webcam-with-mediapipe-and-three-js/|Hand Controller Demo|
-|https://www.remove.bg/upload|Remove Background|
+| https://codepen.io/shshaw/pen/XbxvNj | PNG > SVG |
+| https://tympanus.net/codrops/2024/10/24/creating-a-3d-hand-controller-using-a-webcam-with-mediapipe-and-three-js/ | Hand Controller Demo|
+| https://www.remove.bg/upload | Remove Background |
+| https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js | three.js |
+| https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js | hands.js |
+| https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js | drawing_utils.js |
+| https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js | camera_utils.js |
 
 ### Hlutverk og To Do
 | Hvað | Status | Hver |
 |-|-|-|
 | Sprites | Working | Andri |
-| Audio | Done | Matti |
+| Audio | Working | Matti |
 | Gesture Controll | Working | Matti |
 | Attack System | Working | Matti |
 | Environment Settup | Working | Andri |
@@ -24,29 +28,24 @@ A small turn based RPG fight between 2 wizards (player and computer) dice rolls,
 Project/
 │── assets/
 │   ├── audio/
+│   │   ├── attack.mp3
+│   │   ├── heal.mp3
+│   │   ├── shield_off.mp3
+│   │   └── shield_on.mp3
 │   └── sprite/
 │   │   ├── Characters/
 │   │   │   ├── Player.svg
 │   │   │   └── Enemy.svg
 │   │   ├── Environment/
-│   │   │   ├── Buildings/
-│   │   │   │   ├── Building_1.svg
-│   │   │   │   ├── Building_2.svg
-│   │   │   │   ├── Building_3.svg
-│   │   │   │   └── Building_4.svg
 │   │   │   └── Nature/
-│   │   │   │   ├── Bush_1.svg
-│   │   │   │   ├── Bush_2.svg
-│   │   │   │   ├── Bush_3.svg
-│   │   │   │   ├── Tree_1.svg
-│   │   │   │   ├── Tree_2.svg
-│   │   │   │   └── Tree_3.svg
+│   │   │   │   ├── Cloud/
+│   │   │   │   │   ├── Cloud1.svg
+│   │   │   │   │   ├── Cloud2.svg
+│   │   │   │   │   └── Cloud3.svg
+│   │   │   │   └── bird.svg
 │   │   ├── MoveSet/
-│   │   │   ├── Shield.svg
-│   │   │   ├── Fire.svg
-│   │   │   └── Heal.svg
+│   │   │   └── Shield.svg
 │   │   └── Numbers/
-│   │   │   ├── 0.svg
 │   │   │   ├── 1.svg
 │   │   │   ├── 2.svg
 │   │   │   ├── 3.svg
@@ -59,12 +58,14 @@ Project/
 │   │   ├── lose.html
 │   │   └── start.html
 │   ├── css/
-│   │   └── style.css
+│   │   ├── style.css
+│   │   ├── controll.css
+│   │   └── environment.css
 │   ├── js/
 │   │   ├── game.js
+│   │   ├── audio.js
+│   │   ├── map.js
 │   │   └── config.js
-│   ├── imports/
-│   │   └── import.js
 └── index.html
 ```
 
