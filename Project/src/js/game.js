@@ -79,12 +79,6 @@ function rollDice(sides) {
     return Math.floor(Math.random() * sides) + 1;
 }
 
-function playAudio(audioKey) {
-    let audio = new Audio(CONFIG.AUDIO[audioKey]); // Access from config.js
-    audio.volume = 0.7;
-    audio.play();
-}
-
 // DELETE BEFORE HANDING IN ASIGNMENT < function logAction() >
 function logAction(message) {
     let logList = document.getElementById("log-list");
@@ -181,14 +175,12 @@ function toggleShieldEffect(targetId, isActive) {
         shieldElement.style.opacity = "1";
         shieldElement.style.zIndex = "10";
 
-        playAudio("SHIELD_ACTIVATE");
     } else {
         if (shieldElement) {
             shieldElement.style.opacity = "0";
             setTimeout(() => {
                 if (document.getElementById(`${targetId}-shield`)) {
                     document.getElementById(`${targetId}-shield`).remove();
-                    playAudio("SHIELD_DEACTIVATE");
                 }
             }, 300);
         }
@@ -202,12 +194,15 @@ function playerAction(action) {
         let damage = rollDice(6);
         let blockedDamage = 0;
         let reducedDamage = damage;
+        AudioManager.playSound("ATTACK");
 
         if (enemyShieldActive) {
             blockedDamage = rollDice(4);
             reducedDamage = Math.max(0, damage - blockedDamage);
             enemyShieldActive = false; // Shield breaks after blocking one attack
             toggleShieldEffect("enemy", false);
+            AudioManager.playSound("SHIELD_DEACTIVATE");
+
         }
 
         logAction(`🔥 Player casts Fireball! Damage: ${damage} (Blocked: ${blockedDamage}, Final: ${reducedDamage})`);
@@ -230,6 +225,8 @@ function playerAction(action) {
         logAction(`💚 Player heals for ${healAmount} HP.`);
         createFloatingNumber("player", healAmount, "heal");
         glowEffect("player", "green");
+        AudioManager.playSound("HEAL");
+
     } 
     
     else if (action === "shield") {
@@ -237,6 +234,8 @@ function playerAction(action) {
             playerShieldActive = true;
             toggleShieldEffect("player", true);
             logAction(`🛡 Player activates Shield!`);
+            AudioManager.playSound("SHIELD_ACTIVATE");
+
         }
     }
 
@@ -264,10 +263,16 @@ function enemyTurn() {
 
     if (action === "attack") {
         handleEnemyAttack();
+        AudioManager.playSound("ATTACK");
+
     } else if (action === "heal") {
         handleEnemyHeal();
+        AudioManager.playSound("HEAL");
+
     } else if (action === "shield") {
         handleEnemyShield();
+        AudioManager.playSound("SHIELD_ACTIVATE");
+
     }
 
     updateHealthBars();
@@ -290,6 +295,8 @@ function handleEnemyAttack() {
         reducedDamage = Math.max(0, damage - blockedDamage);
         playerShieldActive = false; // Shield breaks after blocking one attack
         toggleShieldEffect("player", false);
+        AudioManager.playSound("SHIELD_DEACTIVATE");
+
     }
 
     logAction(`🔥 Enemy attacks for ${damage} (Blocked: ${blockedDamage}, Final: ${reducedDamage})`);
@@ -302,7 +309,6 @@ function handleEnemyAttack() {
     glowEffect("player", "red");
 
     playerHealth = Math.max(0, playerHealth - reducedDamage);
-    playAudio("ATTACK");
 
     document.getElementById("player").classList.add("shake");
     setTimeout(() => document.getElementById("player").classList.remove("shake"), 200);
