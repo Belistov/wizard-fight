@@ -1,9 +1,0 @@
-.cloud {
-    position: absolute;
-    width: 100px; /* Adjust if needed */
-    height: auto;
-    opacity: 0.8;
-    top: 5%; /* Initial top position */
-    z-index: 2; /* Ensure clouds are behind characters */
-    filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.2));
-}

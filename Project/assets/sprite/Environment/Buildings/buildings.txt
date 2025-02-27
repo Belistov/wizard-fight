@@ -1,7 +1,0 @@
-Left side | Player | Blue 
-L_Building_1.svg
-L_Building_2.svg
-
-Right Side | Enemy | Red
-R_Building_1.svg
-R_Building_2.svg
