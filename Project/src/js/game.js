@@ -67,7 +67,7 @@ function detectGesture(landmarks) {
         // Clear the gesture after a short delay to allow new gestures
         setTimeout(() => {
             lastGesture = null;
-        }, 500); // Adjust delay as needed (500ms = 0.5 seconds)
+        }, 1500); // Adjust delay as needed (500ms = 0.5 seconds)
 
         return gesture;
     }
@@ -196,6 +196,8 @@ function toggleShieldEffect(targetId, isActive) {
 }
 
 function playerAction(action) {
+    setButtonsState(true); // Disable buttons immediately after player action
+
     if (action === "attack") {
         let damage = rollDice(6);
         let blockedDamage = 0;
@@ -209,13 +211,12 @@ function playerAction(action) {
         }
 
         logAction(`🔥 Player casts Fireball! Damage: ${damage} (Blocked: ${blockedDamage}, Final: ${reducedDamage})`);
-        
-        if (blockedDamage > 0) {
-            createFloatingNumber("enemy", blockedDamage, "shield-block"); // Show blocked damage
-        }
-        
-        createFloatingNumber("enemy", reducedDamage, "damage"); // Show final damage
 
+        if (blockedDamage > 0) {
+            createFloatingNumber("enemy", blockedDamage, "shield-block");
+        }
+
+        createFloatingNumber("enemy", reducedDamage, "damage");
         glowEffect("enemy", "red");
 
         enemyHealth = Math.max(0, enemyHealth - reducedDamage);
@@ -223,7 +224,7 @@ function playerAction(action) {
         setTimeout(() => document.getElementById("enemy").classList.remove("shake"), 200);
     } 
     
-    else if (action === 'heal') {
+    else if (action === "heal") {
         let healAmount = rollDice(4);
         playerHealth = Math.min(75, playerHealth + healAmount);
         logAction(`💚 Player heals for ${healAmount} HP.`);
@@ -231,7 +232,7 @@ function playerAction(action) {
         glowEffect("player", "green");
     } 
     
-    else if (action === 'shield') {
+    else if (action === "shield") {
         if (!playerShieldActive) {
             playerShieldActive = true;
             toggleShieldEffect("player", true);
@@ -243,6 +244,7 @@ function playerAction(action) {
     checkGameOver();
     setTimeout(() => enemyTurn(), 1000);
 }
+
 
 let lastEnemyAction = null; // Store last enemy action
 let enemyTurnInProgress = false; // Prevent multiple turns happening too fast

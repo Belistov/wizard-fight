@@ -6,11 +6,14 @@
     <title>Wizard Battle</title>
     <link rel="stylesheet" href="src/css/style.css">
     <link rel="stylesheet" href="src/css/controll.css">
+    <link rel="stylesheet" href="src/css/environment.css">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    
 </head>
 <body>
     <!-- Start Screen -->
@@ -45,7 +48,9 @@
                 <p id="enemy-health-text">75 HP</p>
             </div>
         </div>
-        
+
+
+
         <div id="game-log">
             <h2>Game Log</h2>
             <ul id="log-list"></ul>
@@ -59,6 +64,7 @@
 
     <!-- All new js files must be above game.js -->
     <script src="src/js/config.js"></script>
+    <script src="src/js/map.js"></script>
     <script src="src/js/game.js"></script>
 </body>
 </html>
