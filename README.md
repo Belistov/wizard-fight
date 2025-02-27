@@ -16,9 +16,9 @@ A small turn based RPG fight between 2 wizards (player and computer) dice rolls,
 | Hvað | Status | Hver |
 |-|-|-|
 | Sprites | Working | Andri |
-| Audio | Working | Matti |
-| Gesture Controll | Working | Matti |
-| Attack System | Working | Matti |
+| Audio | Done | Matti |
+| Gesture Controll | Done | Matti |
+| Attack System | Done | Matti |
 | Environment Settup | Working | Andri |
 | CSS | Done | Andri |
 |add |to|list|
