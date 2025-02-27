@@ -1,0 +1,5 @@
+canvas {
+    width: 15%; /* Adjust size of the camera feed */
+    height: auto;
+    border: 2px solid #fff;
+}

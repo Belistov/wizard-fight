@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wizard Battle</title>
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="src/css/controll.css">
+    <link rel="stylesheet" href="src/css/environment.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    
+</head>
+<body>
+    <!-- Start Screen -->
+    <section id="bilid">
+        <p>
+            🤟 - Varpar Eldkúlu á óvin. Kastaður er teningur upp á skaða 1d6. 👍 - Fá meiri lífstig. Kastaður er teningur upp á auka líf 1d4. ✋ - Varpa skyldi til að vernda sjálfan sig. Skaði minnkar um 50%
+        </p>
+        <br><br><br><br><br><br><br>
+    </section>
+
+    <!-- EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA -->
+    <!-- EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA -->
+    <!-- EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA -->
+
+    <!-- Game Screen -->
+     
+    <section id="game-container">
+        <div id="battlefield">
+            <div id="player">
+                <img id="player-img" alt="Player Wizard">
+                <div class="health-bar-container">
+                    <div id="player-health-bar" class="health-bar"></div>
+                </div>
+                <p id="player-health-text">75 HP</p>
+            </div>
+            
+            <div id="enemy">
+                <img id="enemy-img" alt="Enemy Wizard">
+                <div class="health-bar-container">
+                    <div id="enemy-health-bar" class="health-bar"></div>
+                </div>
+                <p id="enemy-health-text">75 HP</p>
+            </div>
+        </div>
+
+
+
+        <div id="game-log">
+            <h2>Game Log</h2>
+            <ul id="log-list"></ul>
+        </div>
+    </section>
+
+    <!-- EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA -->
+    <!-- EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA -->
+    <!-- EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA EKKI SNERTA -->
+
+    <!-- All new js files must be above game.js -->
+    <script src="src/js/config.js"></script>
+    <script src="src/js/map.js"></script>
+    <script src="src/js/audio.js"></script>
+    <script src="src/js/game.js"></script>
+</body>
+</html>

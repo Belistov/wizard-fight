@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Press+Start+2P&display=swap');
+
+body {
+    margin: 0;
+    font-family: "Press Start 2p";
+    text-align: center;
+    background: #7587ab;
+    color: white;
+}
+
+.bilid {
+    display: flex;
+    margin-top: 100px;
+}
+
+#battlefield {
+    display: flex;
+    justify-content: space-between; /* Ensures spacing between player and enemy */
+    align-items: center; /* Aligns them vertically */
+    width: 80%; /* Adjust width as needed */
+    margin: auto; /* Centers the container */
+}
+
+#player, #enemy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 150px; /* Adjust width as needed */
+}
+
+#player img, #enemy img {
+    max-width: 100%;
+    height: auto;
+}
+
+.health-bar-container {
+    width: 100px;  /* Adjust width */
+    height: 10px;  /* Adjust height */
+    background-color: #444; /* Background for reference */
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.health-bar {
+    height: 100%;
+    width: 100%;  /* Should be adjusted dynamically */
+    background-color: green;
+    transition: width 0.3s ease-in-out;
+}
+
+#controls-container {
+    margin-top: 20px;
+}
+
+button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+#game-log {
+    margin-top: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#log-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.shake {
+    animation: shake 0.2s;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+.floating-number {
+    position: absolute;
+    width: 50px; /* Match character size */
+    height: 50px;
+    opacity: 1;
+    transition: transform 1.5s ease-out, opacity 1.5s ease-out;
+}
+
+.damage { filter: invert(18%) sepia(90%) saturate(750%) hue-rotate(355deg); } /* Red */
+.heal { filter: invert(40%) sepia(80%) saturate(600%) hue-rotate(90deg); } /* Green */
+.shield-block { filter: invert(40%) sepia(80%) saturate(600%) hue-rotate(210deg); } /* Blue */
+.shield-taken { filter: invert(18%) sepia(90%) saturate(750%) hue-rotate(355deg); } /* Red */
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-60px); opacity: 0; }
+}
+
+#menu-container, #result-container {
+    text-align: center;
+    margin-top: 20vh;
+}
+
+button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+#stats-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #333;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.shield-effect {
+    position: absolute;
+    width: 120px; /* Adjust size as needed */
+    height: 120px;
+    animation: shieldPulse 1s infinite alternate;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+@keyframes shieldPulse {
+    0% { opacity: 0.45; }
+    100% { opacity: 0.75; }
+}
+
+.video-game-button {
+	text-shadow: 1px 1px pink, -1px -1px maroon;
+
+	line-height: 1.5em;
+	text-align: center;
+	display: inline-block;
+	width: 1.5em;
+	-webkit-border-radius: .75em;
+	-moz-border-radius: .75em;
+	-o-border-radius: .75em;
+		border-radius: .75em;
+	background-color: red;
+	-webkit-box-shadow:  0 .2em maroon;
+	-moz-box-shadow:  0 .2em maroon;
+	-o-box-shadow:  0 .2em maroon;
+	box-shadow:  0 .2em maroon;
+	color: red;
+	margin: 5px;
+	background-color: red;
+	background-image: -o-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
+	background-image: -moz-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
+	background-image: -webkit-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
+	background-image: linear-gradient(left top, pink 3%, red 22%, maroon 99%);
+	cursor: pointer;
+  padding-left: 5px;
+}
+.start-btn{
+    text-align: center;
+	display: inline-block;
+	margin:5px;
+    font-weight: bold;
+    padding: 10px 0 10px 10px ;
+    background-color: lightgray;
+    text-shadow: -1px -1px black, 1px 1px white;
+    color: gray;
+    -webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-o-border-radius: 7px;
+	border-radius: 7px;
+    box-shadow: 0 .2em gray; 
+    cursor: pointer;
+
+}
+.video-game-button:active, .start-btn:active {
+	box-shadow: none;
+	position: relative;
+	top: .2em;
+}
