@@ -1,7 +1,7 @@
 # wizard-fight // Þetta verður link á leikinn
 A small turn based RPG fight between 2 wizards (player and computer) dice rolls, hand tracking.
 
-### Góðir Hlekkir
+### Heimildir
 |Hlekkur|Hvað er þetta|
 |-|-|
 | https://codepen.io/shshaw/pen/XbxvNj | PNG > SVG |
