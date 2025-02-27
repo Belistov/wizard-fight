@@ -67,7 +67,7 @@ function detectGesture(landmarks) {
         // Clear the gesture after a short delay to allow new gestures
         setTimeout(() => {
             lastGesture = null;
-        }, 1500); // Adjust delay as needed (500ms = 0.5 seconds)
+        }, 1450); // Adjust delay as needed (500ms = 0.5 seconds)
 
         return gesture;
     }

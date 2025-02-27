@@ -1,3 +1,9 @@
+// Fuglarnir fljúga
+// player and Enemy stand on platform_cloud.svg
+
+// environment.svg
+// - gera smá pixel hue hjá background fyrir meira astetic
+
 function spawnCloud() {
     const gameContainer = document.getElementById("game-container");
     if (!gameContainer) {
@@ -55,3 +61,4 @@ function spawnClouds() {
 
 // Ensure clouds start when page loads
 document.addEventListener("DOMContentLoaded", spawnClouds);
+
