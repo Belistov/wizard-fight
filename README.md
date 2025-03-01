@@ -30,16 +30,6 @@ Turn Based RPG milli 2 galdrakarla (PvE). Notast er við Hand tracking til að �
 | https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js | drawing_utils.js |
 | https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js | camera_utils.js |
 
-### Hlutverk og To Do
-| Hvað | Status | Hver |
-|-|-|-|
-| Sprites | Done | Andri |
-| Audio | Done | Matti |
-| Gesture Controll | Done | Matti |
-| Attack System | Done | Matti |
-| Environment Setup | Done | Andri |
-| CSS | Done | Andri |
-|add |to|list|
 
 ### File Strúktúr
 ```graphQL
