@@ -66,6 +66,7 @@ Project/
 │   │   ├── game.js
 │   │   ├── audio.js
 │   │   ├── map.js
+│   │   ├── background.js
 │   │   └── config.js
 └── index.html
 ```
