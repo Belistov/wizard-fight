@@ -1,5 +1,5 @@
 # [Wizard Fight](https://snubble9753.github.io/)
-##### Andri og Matthías - Áfangi: FORR3FV05EU - Tæknimenntaskólinn
+#### Andri og Matthías - Áfangi: FORR3FV05EU - Tæknimenntaskólinn
 Turn Based RPG milli 2 galdrakarla (PvE). Notast er við Hand tracking til að áhveða hvað blái galdrakarlinn gerir. 
 
 ### Heimildir
