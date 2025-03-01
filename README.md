@@ -1,10 +1,10 @@
-# [wizard-fight](https://snubble9753.github.io/)
-A small turn based RPG fight between 2 wizards (player and computer) dice rolls, hand tracking.
+# [Wizard Fight](https://snubble9753.github.io/)
+- Andri og Matthías
+Turn Based RPG milli 2 galdrakarla (PvE). Notast er við Hand tracking til að áhveða hvað blái galdrakarlinn gerir. 
 
 ### Heimildir
 |Hlekkur|Hvað er þetta|
 |-|-|
-| https://codepen.io/shshaw/pen/XbxvNj | PNG > SVG |
 | https://tympanus.net/codrops/2024/10/24/creating-a-3d-hand-controller-using-a-webcam-with-mediapipe-and-three-js/ | Hand Controller Demo |
 | https://www.remove.bg/upload | Remove Background |
 | https://speckyboy.com/creative-snippets-pixelated-backgrounds/ | Background |
