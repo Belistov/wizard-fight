@@ -1,8 +1,25 @@
-# [Wizard Fight](https://snubble9753.github.io/)
+# [Wizard Fight](https://snubble9753.github.io/) - linkur á leikinn
 #### Andri og Matthías - Áfangi: FORR3FV05EU - Tæknimenntaskólinn
 Turn Based RPG milli 2 galdrakarla (PvE). Notast er við Hand tracking til að áhveða hvað blái galdrakarlinn gerir. 
 
-### Heimildir
+### Leiðbeningar
+Það eru 3 hreyfingar sem hægt er að gera. <br>
+1. 🤟 - Varpar Eldkúlu á óvin. Kastaður er teningur upp á skaða 1d6
+2. 👍 - Fá meiri lífstig. Kastaður er teningur upp á auka líf 1d4
+3. ✋ - Varpa skyldi til að vernda sjálfan sig. Skaði minnkar um 50%
+
+1. Hver Galdrakall hefur 75 Líf
+2. 10% líkur að árás hittir ekki (miss)
+3. 3% líkur að árás drepur strax óvin
+
+### Myndir/Video
+Útlit leiks
+![image](https://github.com/user-attachments/assets/a9001a02-60d6-4fcd-8aa9-53c2a18e55f0)
+
+[Video af virkni leiks](https://www.youtube.com/watch?v=nfwj6NKrf6M)
+
+
+### Heimildir/söfn
 |Hlekkur|Hvað er þetta|
 |-|-|
 | https://tympanus.net/codrops/2024/10/24/creating-a-3d-hand-controller-using-a-webcam-with-mediapipe-and-three-js/ | Hand Controller Demo |
@@ -70,13 +87,3 @@ Project/
 │   │   └── config.js
 └── index.html
 ```
-
-### Leiðbeningar
-Það eru 3 hreyfingar sem hægt er að gera. <br>
-1. 🤟 - Varpar Eldkúlu á óvin. Kastaður er teningur upp á skaða 1d6
-2. 👍 - Fá meiri lífstig. Kastaður er teningur upp á auka líf 1d4
-3. ✋ - Varpa skyldi til að vernda sjálfan sig. Skaði minnkar um 50%
-
-1. Hver Galdra Kall hefur 75 Líf
-2. 10% líkur að árás hittir ekki (miss)
-3. 3% líkur að árás drepur strax óvin
