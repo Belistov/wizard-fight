@@ -5,8 +5,9 @@ A small turn based RPG fight between 2 wizards (player and computer) dice rolls,
 |Hlekkur|Hvað er þetta|
 |-|-|
 | https://codepen.io/shshaw/pen/XbxvNj | PNG > SVG |
-| https://tympanus.net/codrops/2024/10/24/creating-a-3d-hand-controller-using-a-webcam-with-mediapipe-and-three-js/ | Hand Controller Demo|
+| https://tympanus.net/codrops/2024/10/24/creating-a-3d-hand-controller-using-a-webcam-with-mediapipe-and-three-js/ | Hand Controller Demo |
 | https://www.remove.bg/upload | Remove Background |
+| https://speckyboy.com/creative-snippets-pixelated-backgrounds/ | Background |
 | https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js | three.js |
 | https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js | hands.js |
 | https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js | drawing_utils.js |
