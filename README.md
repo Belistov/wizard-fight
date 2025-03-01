@@ -8,9 +8,9 @@ Turn Based RPG milli 2 galdrakarla (PvE). Notast er við Hand tracking til að �
 2. 👍 - Fá meiri lífstig. Kastaður er teningur upp á auka líf 1d4
 3. ✋ - Varpa skyldi til að vernda sjálfan sig. Skaði minnkar um 50%
 
-1. Hver Galdrakall hefur 75 Líf
-2. 10% líkur að árás hittir ekki (miss)
-3. 3% líkur að árás drepur strax óvin
+- Hver Galdrakall hefur 75 Líf
+- 10% líkur að árás hittir ekki (miss)
+- 3% líkur að árás drepur strax óvin
 
 ### Myndir/Video
 Útlit leiks
