@@ -16,11 +16,11 @@ A small turn based RPG fight between 2 wizards (player and computer) dice rolls,
 ### Hlutverk og To Do
 | Hvað | Status | Hver |
 |-|-|-|
-| Sprites | Working | Andri |
+| Sprites | Done | Andri |
 | Audio | Done | Matti |
 | Gesture Controll | Done | Matti |
 | Attack System | Done | Matti |
-| Environment Settup | Working | Andri |
+| Environment Setup | Done | Andri |
 | CSS | Done | Andri |
 |add |to|list|
 
