@@ -1,9 +1,0 @@
-canvas {
-    width: 20%; /* Adjust size of the camera feed */
-    height: auto;
-    border: 2px solid #fff;
-    position: absolute; /* Makes it possible to move the canvas */
-    top: 50%; /* Moves the canvas vertically to the middle of the screen */
-    left: 50%; /* Moves the canvas horizontally to the middle of the screen */
-    transform: translate(-50%, -50%) scaleX(-1); /* Adjusts the canvas position to perfectly center it */
-}
