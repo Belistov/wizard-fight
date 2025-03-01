@@ -1,0 +1,189 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: white;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    background: #1591aa;
+    overflow: hidden;
+    position: relative; /* Ensures other elements can be positioned relative to the body */
+}
+
+/* Side Panel - ensure it spans the full width and is behind everything */
+.sidePanel {
+    position: absolute;  /* Position the panel behind other elements */
+    bottom: 0;  /* Position at the bottom of the screen */
+    left: 0;  /* Align to the left of the screen */
+    width: 100%;  /* Full width of the viewport */
+    height: 100%;  /* Adjust the height to your desired size */
+    z-index: -1;  /* Position it behind all other content */
+}
+
+/* Pixel container - stays centered */
+.pixelCon {
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    z-index: 1; /* Ensures it's above the sidePanel */
+}
+
+/* Individual pixels */
+.pixel {
+    background: white;
+    width: 10%;
+    padding-top: 10%;
+    float: left;
+    opacity: 0.0;
+    animation: blink 5s infinite;
+    z-index: 2; /* Ensures each pixel stays above the sidePanel */
+}
+
+/* Blinking animation */
+@keyframes blink {
+    0%    {opacity: 0.0;}
+    25%   {opacity: 0.0;}
+    50%   {opacity: 0.5;}
+    100%  {opacity: 0.0;}
+}
+
+.bilid {
+    display: flex;
+    margin-top: 100px;
+}
+
+.headerText {
+    font-weight: bold;
+    color: black;
+}
+
+#battlefield {
+    display: flex;
+    justify-content: space-between; /* Ensures spacing between player and enemy */
+    align-items: center; /* Aligns them vertically */
+    width: 80%; /* Adjust width as needed */
+    margin: auto; /* Centers the container */
+}
+
+#player, #enemy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 150px; /* Adjust width as needed */
+}
+
+#player img, #enemy img {
+    max-width: 100%;
+    height: auto;
+}
+
+.health-bar-container {
+    width: 100px;  /* Adjust width */
+    height: 10px;  /* Adjust height */
+    background-color: #444; /* Background for reference */
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.health-bar {
+    height: 100%;
+    width: 100%;  /* Should be adjusted dynamically */
+    background-color: green;
+    transition: width 0.3s ease-in-out;
+}
+
+#controls-container {
+    margin-top: 20px;
+}
+
+button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+#game-log {
+    width: 30%;
+    margin-top: 20px;
+    background: rgba(133, 111, 154, 0.591);
+    padding: 10px;
+    margin-left: 34%;
+    border-radius: 5px;
+}
+
+#log-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.shake {
+    animation: shake 0.2s;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+.floating-number {
+    position: absolute;
+    width: 50px; /* Match character size */
+    height: 50px;
+    opacity: 1;
+    transition: transform 1.5s ease-out, opacity 1.5s ease-out;
+}
+
+.damage { filter: invert(18%) sepia(90%) saturate(750%) hue-rotate(355deg); } /* Red */
+.heal { filter: invert(40%) sepia(80%) saturate(600%) hue-rotate(90deg); } /* Green */
+.shield-block { filter: invert(40%) sepia(80%) saturate(600%) hue-rotate(210deg); } /* Blue */
+.shield-taken { filter: invert(18%) sepia(90%) saturate(750%) hue-rotate(355deg); } /* Red */
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-60px); opacity: 0; }
+}
+
+#menu-container, #result-container {
+    text-align: center;
+    margin-top: 20vh;
+}
+
+button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+#stats-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #333;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.shield-effect {
+    position: absolute;
+    width: 120px; /* Adjust size as needed */
+    height: 120px;
+    animation: shieldPulse 1s infinite alternate;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+@keyframes shieldPulse {
+    0% { opacity: 0.45; }
+    100% { opacity: 0.75; }
+}
