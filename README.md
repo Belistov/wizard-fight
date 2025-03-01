@@ -1,4 +1,4 @@
-[# wizard-fight(https://snubble9753.github.io/)]
+# [wizard-fight(https://snubble9753.github.io/)]
 A small turn based RPG fight between 2 wizards (player and computer) dice rolls, hand tracking.
 
 ### Heimildir
